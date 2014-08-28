@@ -1,0 +1,22 @@
+// 背景透明文字不透明
+@mixin better_transparentize($color, $alpha){
+  $c: rgba($color, $alpha);
+  $ie_c: ie_hex_str($c);
+  background: rgba($color, 1);
+  background: $c;
+  background: transparent\9;
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie_c}, endColorstr=#{$ie_c});
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie_c}, endColorstr=#{$ie_c})";
+}
+
+@mixin square($value){
+  width: $value;
+  height: $value;
+}
+
+@mixin rectangle($width, $height){
+  width: $width;
+  height: $height;
+}
+
