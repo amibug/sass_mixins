@@ -1,3 +1,4 @@
+
 // 背景透明文字不透明
 @mixin better_transparentize($color, $alpha){
   $c: rgba($color, $alpha);
@@ -20,3 +21,97 @@
   height: $height;
 }
 
+@mixin size($width, $height: $width){
+  width: $width;
+  height: $height;
+}
+
+@mixin input-focus{
+
+}
+
+@mixin css3_hack(){
+  @include backface-visibility(hidden);
+  @include perspective(1000);
+}
+
+/**/
+@mixin triangle($size: 3px, $color: #bbb, $orientation: down){
+  width: 0;
+  height: 0;
+  border-width: $size;
+  font-size: 0;
+  line-height: 0;
+  @if $orientation == down {
+    border-style: solid dashed dashed dashed;
+    border-color: $color transparent transparent;
+  } @elseif $orientation == right {
+    border-style: dashed dashed dashed solid;
+    border-color: transparent transparent transparent $color;
+  } @elseif $orientation == up {
+    border-style: dashed dashed solid dashed;
+    border-color: transparent transparent $color transparent;
+  } @elseif $orientation == left {
+    border-style: dashed solid dashed dashed;
+    border-color: transparent $color transparent transparent;
+  }
+}
+// Menus with a sliding marker
+@mixin menu_with_slide($width: 6em, $height: 2em, $background-selected: #fff,  $background-hover: #111, $size: 6, $gtIE9: true, $opacity: 1, $duration: .3s, $delay: 0s){
+  $background-selected-opacity : $background-selected;
+  $background-hover-opacity : $background-hover;
+  @if $gtIE9 == true {
+    $background-selected-opacity : rgba($background-selected, $opacity);
+    $background-hover-opacity : rgba($background-hover, $opacity);
+  }
+
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  @include legacy-pie-clearfix;
+  > li{
+    line-height: $height;
+    width: $width;
+    height: $height;
+    @include float-left;
+    @if $gtIE9 == true {
+      &:last-child {
+        position: absolute;
+        display: block;
+        z-index: -1;
+        left: -$width;
+        bottom: 0;
+        height: $height;
+        background: $background-hover-opacity;
+        @include transition(transform $duration);
+      }
+      @for $i from 1 through $size {
+        &:nth-child(#{$i}){
+          &.selected ~ li:last-child {
+            @include transform(translateX(#{$i*$width}) );
+          }
+          &:hover ~ li:last-child {
+            @include transform(translateX(#{$i*$width}) !important);
+          }
+        }
+      }
+    } @else {
+
+      &:hover{
+        background: $background-hover-opacity;
+      }
+    }
+    > a{
+      display: block;
+      padding: 0 5px;
+      text-align: center;
+      text-decoration: none;
+    }
+  }
+  .last{
+    display: none;
+  }
+  .selected {
+    background: $background-selected-opacity;
+  }
+}
