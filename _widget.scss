@@ -1,6 +1,5 @@
-
 // 背景透明文字不透明
-@mixin better_transparentize($color, $alpha){
+@mixin transparentize($color, $alpha){
   $c: rgba($color, $alpha);
   $ie_c: ie_hex_str($c);
   background: rgba($color, 1);
@@ -11,31 +10,7 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie_c}, endColorstr=#{$ie_c})";
 }
 
-@mixin square($value){
-  width: $value;
-  height: $value;
-}
-
-@mixin rectangle($width, $height){
-  width: $width;
-  height: $height;
-}
-
-@mixin size($width, $height: $width){
-  width: $width;
-  height: $height;
-}
-
-@mixin input-focus{
-
-}
-
-@mixin css3_hack(){
-  @include backface-visibility(hidden);
-  @include perspective(1000);
-}
-
-/**/
+// 箭头 
 @mixin triangle($size: 3px, $color: #bbb, $orientation: down){
   width: 0;
   height: 0;
@@ -56,6 +31,7 @@
     border-color: transparent $color transparent transparent;
   }
 }
+
 // Menus with a sliding marker
 @mixin menu_with_slide($width: 6em, $height: 2em, $background-selected: #fff,  $background-hover: #111, $size: 6, $gtIE9: true, $opacity: 1, $duration: .3s, $delay: 0s){
   $background-selected-opacity : $background-selected;
