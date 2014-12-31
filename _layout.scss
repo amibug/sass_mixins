@@ -24,3 +24,17 @@
 		}
 	}
 }
+
+// display: inline-block
+@mixin dibWrap(){
+  .dib-wrap {
+    font-size:0;/* 所有浏览器 */
+    *word-spacing:-1px;/* IE6、7 */
+    .dib{
+      display: inline-block;*display:inline;*zoom:1;
+      font-size: 12px;
+      letter-spacing: normal;/* 字间距 */word-spacing: normal;/* 空白间距 */
+      vertical-align: top;
+    }
+  }
+}
