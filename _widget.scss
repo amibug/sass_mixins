@@ -148,4 +148,24 @@
     right: 0;
     @include animation(loading $duration $iteration ease-in-out);
   }
-} 
+}
+
+// Quantity Queries 数量查询样式应用
+// $config: ('atleast': 2, 'atmost': 5)
+@mixin quantity-queries($config, $selector) {
+  $at-least: map-get($config, "atleast");
+  $at-most: map-get($config, "atmost");
+  @if $at-least != null and $at-most!= null {
+    #{$selector}:nth-last-child(n+#{$at-least}):nth-last-child(-n+#{$at-most}):first-child, #{$selector}:nth-last-child(n+#{$at-least}):nth-last-child(-n+#{$at-most}):first-child ~ #{$selector} {
+      @content;
+    }
+  } @else if $at-least != null {
+    #{$selector}:nth-last-child(n+#{$at-least}), li:nth-last-child(n+#{$at-least}) ~ #{$selector} {
+      @content;
+    }
+  } @else if $at-most != null {
+    #{$selector}:nth-last-child(-n+#{$at-most}):first-child, li:nth-last-child(-n+#{$at-most}):first-child ~ #{$selector} {
+      @content;
+    }
+  }
+}
