@@ -98,3 +98,20 @@ $node-font-sizes: (
     font-size: $fs-font-size;
   }
 }
+
+// Alignment Shifting Wrapping 
+// ===========================
+// 主副标题左右显示布局，容器宽度不足时，标题分两行Alignment left显示
+@mixin alignment-shifting-wrap(){
+  .flex-title {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    .title-main,.title-note {
+      white-space: nowrap;
+    }
+    .title-main {
+      flex-grow: 1;
+    }
+  }
+}
