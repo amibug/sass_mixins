@@ -1,5 +1,0 @@
-// css3动画抖动
-@mixin css3_hack() {
-  @include backface-visibility(hidden);
-  @include perspective(1000);
-}
